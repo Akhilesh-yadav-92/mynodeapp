@@ -87,10 +87,12 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
   console.log('Client connected');
 
-  socket.emit('dataUpdated', {
-    message: 'Welcome from server!',
-    time: new Date().toISOString(),
-  },5000);
+   setInterval(() => {
+    socket.emit('dataUpdated', {
+      message: 'Hi Akhilesh',
+      timestamp: new Date().toISOString(),
+    });
+  }, 5000); // every 10 seconds
 
   socket.on('disconnect', () => {
     console.log('Client disconnected');
