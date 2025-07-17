@@ -35,6 +35,43 @@
 // =============================
 
 
+// const express = require('express');
+// const http = require('http');
+// const { Server } = require('socket.io');
+
+// const app = express();
+// const server = http.createServer(app);
+// const io = new Server(server, {
+//   cors: {
+//     origin: '*', // Allow all origins for dev
+//   }
+// });
+
+// // Send data on connection or on update
+// io.on('connection', (socket) => {
+//   console.log('Client connected');
+
+//   // Send test data every 10 seconds
+//   setInterval(() => {
+//     socket.emit('dataUpdated', {
+//       message: 'New server data akhllilesjkjkh!',
+//       timestamp: new Date().toISOString(),
+//     });
+//   }, 5000); // every 10 seconds
+
+//   socket.on('disconnect', () => {
+//     console.log('Client disconnected');
+//   });
+// });
+
+// server.listen(3000, () => {
+//   console.log('Server running on http://localhost:3000');
+// });
+
+
+// ===============
+
+
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -43,21 +80,17 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*', // Allow all origins for dev
+    origin: '*', // Allow access from anywhere (for testing)
   }
 });
 
-// Send data on connection or on update
 io.on('connection', (socket) => {
   console.log('Client connected');
 
-  // Send test data every 10 seconds
-  setInterval(() => {
-    socket.emit('dataUpdated', {
-      message: 'New server data akhllilesjkjkh!',
-      timestamp: new Date().toISOString(),
-    });
-  }, 5000); // every 10 seconds
+  socket.emit('dataUpdated', {
+    message: 'Welcome from server!',
+    time: new Date().toISOString(),
+  });
 
   socket.on('disconnect', () => {
     console.log('Client disconnected');
@@ -65,5 +98,5 @@ io.on('connection', (socket) => {
 });
 
 server.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+  console.log('Server running on port 3000');
 });
