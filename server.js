@@ -90,7 +90,7 @@ io.on('connection', (socket) => {
   socket.emit('dataUpdated', {
     message: 'Welcome from server!',
     time: new Date().toISOString(),
-  });
+  },5000);
 
   socket.on('disconnect', () => {
     console.log('Client disconnected');
